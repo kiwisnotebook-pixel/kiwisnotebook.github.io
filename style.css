@@ -1,0 +1,139 @@
+/* style.css - place in repo root (same directory as your HTML files) */
+
+/* Fonts are loaded from Google in each page head */
+:root{
+  --bg: #fff;
+  --muted: #6b6b6b;
+  --accent: #2b7a78;
+  --accent-2: #17252a;
+  --max-width: 1000px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--accent-2);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+}
+
+/* container to center content */
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:1.25rem;
+}
+
+/* header/nav */
+.site-header{
+  border-bottom:1px solid #eee;
+  background:transparent;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+}
+.logo{
+  font-family: "Playfair Display", serif;
+  font-weight:600;
+  text-decoration:none;
+  color:var(--accent-2);
+  font-size:1.25rem;
+}
+.nav-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  gap:1rem;
+  align-items:center;
+}
+.nav-list a{
+  text-decoration:none;
+  color:var(--accent-2);
+  padding:0.4rem 0.6rem;
+  border-radius:6px;
+  font-weight:500;
+}
+.nav-list a:hover,
+.nav-list a[aria-current="page"]{
+  background: #f1f7f7;
+  color:var(--accent);
+}
+
+/* hero */
+.hero{
+  text-align:center;
+  padding:3.5rem 1.25rem;
+}
+.hero h1{
+  margin:0 0 0.5rem 0;
+  font-family:"Playfair Display", serif;
+  font-size:2rem;
+  line-height:1.05;
+}
+.subhead{
+  color:var(--muted);
+  max-width:720px;
+  margin:0.75rem auto 1rem;
+}
+
+/* CTA */
+.cta{
+  display:inline-block;
+  background:var(--accent);
+  color:white;
+  text-decoration:none;
+  padding:0.65rem 1rem;
+  border-radius:8px;
+  font-weight:600;
+}
+
+/* features */
+.features{
+  display:flex;
+  gap:1rem;
+  padding:2rem 1.25rem;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+.feature{
+  flex:1 1 220px;
+  background:#fcffff;
+  border-radius:8px;
+  padding:1rem;
+  box-shadow:0 1px 2px rgba(0,0,0,0.03);
+}
+.feature h2{ margin-top:0; font-size:1.05rem; }
+
+/* content pages */
+.content{ padding:2rem 1.25rem 3rem; }
+.content h1{ font-family:"Playfair Display", serif; font-size:1.6rem }
+.service-block{ margin-bottom:1.25rem; }
+
+/* process list */
+.process-list{ padding-left:1rem }
+
+/* contact */
+.contact-list{ list-style:none; padding:0; margin:0.5rem 0 }
+
+/* footer */
+.site-footer{
+  border-top:1px solid #eee;
+  padding:1.25rem 0;
+  color:var(--muted);
+  font-size:0.95rem;
+}
+
+/* responsive */
+@media (max-width:720px){
+  .nav-list{ display:flex; gap:0.6rem; font-size:0.95rem; }
+  .features{ flex-direction:column; padding:1rem; }
+  .hero h1{ font-size:1.5rem; }
+}
