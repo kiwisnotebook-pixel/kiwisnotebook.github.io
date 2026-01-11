@@ -1,79 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contact</title>
-  <link rel="stylesheet" href="/assets/css/zine.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact — Kiwi's Notebook</title>
+  <meta name="description" content="Contact Kiwi's Notebook for project inquiries, rates, and availability.">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <!-- contact-form.js removed temporarily to avoid errors while the form is offline -->
 </head>
 <body>
-  <main class="container">
-    <header class="reveal">
-      <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/zines">Zines</a>
-      </nav>
-      <h1>Contact</h1>
-      <p class="lead">Send a message — I’ll get back to you via email.</p>
-    </header>
+<header class="site-header">
+  <nav class="nav container">
+    <a href="index.html" class="logo">Kiwi's Notebook</a>
+    <ul class="nav-list">
+      <li><a href="services.html">Services</a></li>
+      <li><a href="process.html">Process</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <!-- Contact form: replaces any visible email address.
-         IMPORTANT: replace FORM_ID with your Formspree form id (looks like f/abcdxyz) -->
-    <section id="contact" class="reveal" style="--reveal-delay:120ms">
-      <form id="contactForm" class="contact-form" novalidate>
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" required>
+<main class="container content">
+  <h1>Contact</h1>
 
-        <label for="email">Your email</label>
-        <input id="email" name="_replyto" type="email" required>
+  <section class="under-construction" aria-live="polite" style="padding:2rem 0;">
+    <h2>Under Construction</h2>
+    <p class="lead">Coming soon — I'm temporarily taking the contact form offline while I tidy things up.</p>
+    <p class="muted">If you need to reach me urgently, please use any social links on the site or check the profile listed in the footer.</p>
+  </section>
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="6" required></textarea>
+</main>
 
-        <input type="hidden" name="_subject" value="Website contact form">
-
-        <button type="submit" class="btn">Send</button>
-        <p id="contactStatus" aria-live="polite" style="display:none; margin-top:0.6rem;"></p>
-      </form>
-    </section>
-  </main>
-
-  <!-- Optional: reuse /assets/js/reveal.js if you added it earlier for scroll reveals -->
-  <script>
-  // Contact form AJAX submission (Formspree)
-  document.addEventListener('DOMContentLoaded', function () {
-    const FORM_ENDPOINT = 'https://formspree.io/f/FORM_ID'; // <- REPLACE FORM_ID
-    const form = document.getElementById('contactForm');
-    const status = document.getElementById('contactStatus');
-
-    if (!form) return;
-
-    form.addEventListener('submit', async function (e) {
-      e.preventDefault();
-      status.style.display = ''; status.textContent = 'Sending…';
-
-      const data = new FormData(form);
-      try {
-        const resp = await fetch(FORM_ENDPOINT, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        const json = await resp.json().catch(() => ({}));
-
-        if (resp.ok) {
-          status.textContent = 'Thanks — your message was sent.';
-          form.reset();
-        } else {
-          status.textContent = (json && json.error) ? json.error : 'Submission failed. Please try again.';
-        }
-      } catch (err) {
-        status.textContent = 'Network error. Please try again later.';
-      }
-    });
-  });
-  </script>
+<footer class="site-footer">
+  <div class="container">
+    <p>© 2026 Kiwi's Notebook · Creative Editing Studio</p>
+  </div>
+</footer>
 </body>
 </html>
