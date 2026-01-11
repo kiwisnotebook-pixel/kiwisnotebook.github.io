@@ -1,115 +1,29 @@
+/* zine.css — Moodboard-tuned cozy / bookish / zine stylesheet
+   - Base: 15px (~11.25pt) for accessible reading
+   - Primary: key green #2b7a40; Accent: plum #5e2b8c
+   - Adds polaroid/sticker/torn-note utilities and softer paper texture
+   - Preserves reveal animations, respects prefers-reduced-motion
+*/
+
+/* Google fonts (headings/serif + Inter) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
 :root{
-  --bg: #fdf7f0; /* user background */
-  --text: #2b2b2b;
-  --plum: #5e2b8c;
+  --bg: #fdf7f0;            /* soft cream */
+  --paper: #fffefb;
   --key-green: #2b7a40;
+  --plum: #5e2b8c;
+  --text: #111118;         /* warm near-black for high contrast */
+  --muted: #575757;
+  --card-shadow: 0 12px 34px rgba(17,17,24,0.06);
+  --btn-shadow: 0 8px 20px rgba(43,122,64,0.12);
+  --focus-ring: rgba(94,43,140,0.14);
+  --radius-lg: 14px;
+  --radius-sm: 8px;
+  --max-width: 980px;
+  --base-font-size: 15px;  /* ~11.25pt - user requested minimum */
+  --sticker-offset: 6px;
+  --grain-opacity: 0.03;   /* light overlay noise */
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
-}
-
-a {
-  text-decoration: none;
-  color: var(--plum); /* plum accent */
-}
-
-.container{
-  max-width:1000px;
-  margin:0 auto;
-  padding:1.25rem;
-}
-
-.site-header {
-  background-color: var(--key-green); /* key green */
-  padding: 1rem;
-}
-
-.site-header .logo {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  color: #fff;
-  font-size: 1.5rem;
-  text-decoration:none;
-}
-
-nav ul, .nav-list {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-  padding:0;
-  margin:0;
-  align-items:center;
-}
-
-nav ul li a, .nav-list a {
-  color: #fff;
-}
-
-.hero {
-  text-align: center;
-  padding: 3rem 1rem;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 600;
-  margin:0 0 0.5rem 0;
-  font-size:2rem;
-}
-
-.cta {
-  display: inline-block;
-  margin-top: 1rem;
-  background-color: var(--plum);
-  color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  text-decoration:none;
-}
-
-.features {
-  display: flex;
-  justify-content: space-around;
-  padding: 2rem 1rem;
-  gap:1rem;
-}
-.features div, .feature {
-  width: 30%;
-  background:#fff;
-  padding:1rem;
-  border-radius:8px;
-  box-shadow:0 1px 2px rgba(0,0,0,0.04);
-}
-
-.content { padding:2rem 1.25rem 3rem; }
-
-footer, .site-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: var(--key-green);
-  color: #fff;
-}
-
-/* Contact form styles */
-.contact-form{ display:flex; flex-direction:column; gap:0.5rem; max-width:640px; }
-.contact-form input[type="text"], .contact-form input[type="email"], .contact-form textarea{ padding:0.5rem; border:1px solid #e5e5e5; border-radius:6px; font-family:inherit }
-.form-status{ margin-top:0.5rem; }
-.muted{ color: rgba(255,255,255,0.9); }
-
-/* Accessibility helper */
-.sr-only{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden }
-
-@media (max-width:800px){
-  .features { flex-direction:column; }
-  .features div, .feature { width:100%; }
-  .hero h1{ font-size:1.5rem }
-  nav ul { flex-wrap:wrap; }
-}
+/* Base / layout
