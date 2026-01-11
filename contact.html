@@ -7,9 +7,7 @@
   <meta name="description" content="Contact Kiwi's Notebook for project inquiries, rates, and availability.">
   <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <script defer src="assets/js/contact-form.js"></script>
 </head>
 <body>
 <header class="site-header">
@@ -28,12 +26,37 @@
   <h1>Contact</h1>
   <p>I'm currently available for new projects — please share a brief description of your project, word count (if applicable), and preferred timeline.</p>
 
-  <ul class="contact-list">
-    <li>Email: <a href="mailto:hello@kiwisnotebook.example">hello@kiwisnotebook.example</a> (replace with your real address)</li>
-    <li>Prefer sending sample/writing? Attach a short sample or link to a Google Doc and include access details.</li>
-  </ul>
+  <!-- Formspree form -->
+  <form id="contact-form"
+        action="https://formspree.io/f/xykkgozd"
+        method="POST"
+        class="contact-form"
+        novalidate>
 
-  <p>If you'd like a contact form rather than a mailto link, I can add a lightweight form that posts to Formspree or Netlify Forms — tell me which provider you prefer.</p>
+    <label for="name">Your name</label>
+    <input id="name" name="name" type="text" required>
+
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required>
+
+    <label for="project">Project / message</label>
+    <textarea id="project" name="message" rows="6" required></textarea>
+
+    <!-- Honeypot anti-spam field (visually hidden). Bots often fill this; humans won't. -->
+    <label class="sr-only" style="display:none;" for="_gotcha">Leave this field blank</label>
+    <input type="text" name="_gotcha" id="_gotcha" style="display:none" />
+
+    <!-- Optional: set a subject visible to you -->
+    <input type="hidden" name="_subject" value="New contact from kiwisnotebook site">
+
+    <button type="submit" class="cta">Send</button>
+
+    <p id="form-status" class="form-status" aria-live="polite"></p>
+  </form>
+
+  <p class="muted">If you'd prefer, you can also email directly: <a href="mailto:kirstendormanwriting@gmail.com">kirstendormanwriting@gmail.com</a></p>
+
+  <p>Note: Formspree requires that the receiving email be verified in your Formspree account to accept and forward submissions. If you created the form endpoint and haven't verified the email, please check your inbox for a verification message from Formspree and confirm it.</p>
 </main>
 
 <footer class="site-footer">
