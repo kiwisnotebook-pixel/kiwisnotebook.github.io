@@ -1,68 +1,79 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Contact — Kiwi's Notebook</title>
-  <meta name="description" content="Contact Kiwi's Notebook for project inquiries, rates, and availability.">
-  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
-  <script defer src="assets/js/contact-form.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact</title>
+  <link rel="stylesheet" href="/assets/css/zine.css">
 </head>
 <body>
-<header class="site-header">
-  <nav class="nav container">
-    <a href="index.html" class="logo">Kiwi's Notebook</a>
-    <ul class="nav-list">
-      <li><a href="services.html">Services</a></li>
-      <li><a href="process.html">Process</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html" aria-current="page">Contact</a></li>
-    </ul>
-  </nav>
-</header>
+  <main class="container">
+    <header class="reveal">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/zines">Zines</a>
+      </nav>
+      <h1>Contact</h1>
+      <p class="lead">Send a message — I’ll get back to you via email.</p>
+    </header>
 
-<main class="container content">
-  <h1>Contact</h1>
-  <p>I'm currently available for new projects — please share a brief description of your project, word count (if applicable), and preferred timeline.</p>
+    <!-- Contact form: replaces any visible email address.
+         IMPORTANT: replace FORM_ID with your Formspree form id (looks like f/abcdxyz) -->
+    <section id="contact" class="reveal" style="--reveal-delay:120ms">
+      <form id="contactForm" class="contact-form" novalidate>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" required>
 
-  <!-- Formspree form -->
-  <form id="contact-form"
-        action="https://formspree.io/f/xykkgozd"
-        method="POST"
-        class="contact-form"
-        novalidate>
+        <label for="email">Your email</label>
+        <input id="email" name="_replyto" type="email" required>
 
-    <label for="name">Your name</label>
-    <input id="name" name="name" type="text" required>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
 
-    <label for="email">Email</label>
-    <input id="email" name="email" type="email" required>
+        <input type="hidden" name="_subject" value="Website contact form">
 
-    <label for="project">Project / message</label>
-    <textarea id="project" name="message" rows="6" required></textarea>
+        <button type="submit" class="btn">Send</button>
+        <p id="contactStatus" aria-live="polite" style="display:none; margin-top:0.6rem;"></p>
+      </form>
+    </section>
+  </main>
 
-    <!-- Honeypot anti-spam field (visually hidden). Bots often fill this; humans won't. -->
-    <label class="sr-only" style="display:none;" for="_gotcha">Leave this field blank</label>
-    <input type="text" name="_gotcha" id="_gotcha" style="display:none" />
+  <!-- Optional: reuse /assets/js/reveal.js if you added it earlier for scroll reveals -->
+  <script>
+  // Contact form AJAX submission (Formspree)
+  document.addEventListener('DOMContentLoaded', function () {
+    const FORM_ENDPOINT = 'https://formspree.io/f/FORM_ID'; // <- REPLACE FORM_ID
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('contactStatus');
 
-    <!-- Optional: set a subject visible to you -->
-    <input type="hidden" name="_subject" value="New contact from kiwisnotebook site">
+    if (!form) return;
 
-    <button type="submit" class="cta">Send</button>
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      status.style.display = ''; status.textContent = 'Sending…';
 
-    <p id="form-status" class="form-status" aria-live="polite"></p>
-  </form>
+      const data = new FormData(form);
+      try {
+        const resp = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
 
-  <p class="muted">If you'd prefer, you can also email directly: <a href="mailto:kirstendormanwriting@gmail.com">kirstendormanwriting@gmail.com</a></p>
+        const json = await resp.json().catch(() => ({}));
 
-  <p>Note: Formspree requires that the receiving email be verified in your Formspree account to accept and forward submissions. If you created the form endpoint and haven't verified the email, please check your inbox for a verification message from Formspree and confirm it.</p>
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <p>© 2026 Kiwi's Notebook · Creative Editing Studio</p>
-  </div>
-</footer>
+        if (resp.ok) {
+          status.textContent = 'Thanks — your message was sent.';
+          form.reset();
+        } else {
+          status.textContent = (json && json.error) ? json.error : 'Submission failed. Please try again.';
+        }
+      } catch (err) {
+        status.textContent = 'Network error. Please try again later.';
+      }
+    });
+  });
+  </script>
 </body>
 </html>
